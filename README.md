@@ -1,4 +1,4 @@
-# Search for a target by favicon filter
+# Search for a target by favicon
 
 ## Install
 
