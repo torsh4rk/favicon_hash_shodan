@@ -28,7 +28,7 @@ try:
         query = f"{requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}" + "+" + f"{requests.utils.quote(f'ip:{socket.gethostbyname(domain)}')}"
         print(f'\033[92m-> http.favicon.hash:{hash_favicon}')
         print(f"\033[92m-> Search in Shodan ===> https://www.shodan.io/search?query={query}\n")
-        print(f"\n\033[93m[!] Go to https://www.shodan.io/search?query/search?query={requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}\nand view other targets with the same favicon!\n")
+        print(f"\n\033[93m[!] Go to https://www.shodan.io/search?query={requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}\nand view other targets with the same favicon!\n")
     else:
         pass
 except (RequestException, socket.gaierror) as err:
