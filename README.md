@@ -37,7 +37,7 @@ favicon_hash_shodan: python3 favicon_shodan.py --url=https://www.hackerone.com/f
 
 
 [!] Go to https://www.shodan.io/search?query/search?query=http.favicon.hash%3A595148549
-and try get other targets with the same favicon!
+and view other targets with the same favicon!
 
 
 ```
