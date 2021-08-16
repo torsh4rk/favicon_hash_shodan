@@ -26,8 +26,8 @@ try:
     if req.status_code == 200:
         hash_favicon = str(mmh3.hash(resp_encoded))
         query = f"{requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}" + "+" + f"{requests.utils.quote(f'ip:{socket.gethostbyname(domain)}')}"
-        print(f'\033[92m\t-> http.favicon.hash:{hash_favicon}')
-        print(f"\033[92m\t-> Search in Shodan ===> https://www.shodan.io/search?query={query}\n")
+        print(f'\033[92m-> http.favicon.hash:{hash_favicon}')
+        print(f"\033[92m-> Search in Shodan ===> https://www.shodan.io/search?query={query}\n")
         print(f"\n\033[93m[!] Go to https://www.shodan.io/search?query/search?query={requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}\nto try get other targets with the same favicon!\n")
     else:
         pass

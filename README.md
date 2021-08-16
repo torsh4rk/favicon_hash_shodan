@@ -12,7 +12,7 @@
 ## Help Usage
 
 ```
-➜ favicon_hash_shodan: python3 favicon_shodan.py -h
+favicon_hash_shodan: python3 favicon_shodan.py -h
 
 
 usage: favicon_shodan.py [-h] [-u URL]
@@ -28,16 +28,17 @@ optional arguments:
 ## RUN
 
 ```
-➜ favicon_hash_shodan: python favicon_shodan.py --url=https://www.hackerone.com/favicon.ico
+favicon_hash_shodan: python3 favicon_shodan.py --url=https://www.hackerone.com/favicon.ico
 
 [+] Target ===> www.hackerone.com
 
-	-> http.favicon.hash:595148549
-	-> Search in Shodan ===> https://www.shodan.io/search?query=http.favicon.hash%3A595148549+ip%3A104.16.99.52
+-> http.favicon.hash:595148549
+-> Search in Shodan ===> https://www.shodan.io/search?query=http.favicon.hash%3A595148549+ip%3A104.16.99.52
 
 
 [!] Go to https://www.shodan.io/search?query/search?query=http.favicon.hash%3A595148549
 to try get other targets with the same favicon!
+
 
 ```
 
