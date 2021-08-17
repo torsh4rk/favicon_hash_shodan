@@ -72,7 +72,7 @@ def main():
         sys.exit()
     elif args.url != None and args.input == None:
         if os.path.basename(urlparse(URL).path) == None or os.path.basename(urlparse(URL).path) != "favicon.ico":
-            print("[-] Favicon name is missing on URL, type -h or --help for help usage.")
+            print("[-] Path '/favicon.ico' is missing on URL, type -h or --help for help usage.")
             sys.exit()
         else:
             if shodan_cli_api_key != "":
