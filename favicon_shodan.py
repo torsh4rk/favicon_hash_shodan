@@ -58,6 +58,7 @@ def main():
     parser.add_argument("-u","--url", help="For a favicon URL. (Exemple: https://www.hackerone.com/favicon.ico)")
     parser.add_argument("-i","--input", help="For a favicon URL list.")
     parser.add_argument("-v","--verbose", type=int, choices=[0,1], default=0, help="Set a verbose value to use the shodan_cli (API KEY Required).")
+    
     args = parser.parse_args()
 
     URL = args.url
