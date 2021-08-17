@@ -68,11 +68,11 @@ def main():
     # Validating the URL argument (args.url) and INPUT argument (args.input)
 
     if args.url == None and args.input == None:
-        print("[-] URL and Wordlist target is missing, type -h for help usage")
+        print("[-] URL and Wordlist target is missing, type -h or --help for help usage")
         sys.exit()
     elif args.url != None and args.input == None:
         if os.path.basename(urlparse(URL).path) == None or os.path.basename(urlparse(URL).path) != "favicon.ico":
-            print("[-] Favicon name is missing or it's wrong! Type -h or help for help usage.")
+            print("[-] Favicon name is missing on URL, type -h or --help for help usage.")
             sys.exit()
         else:
             if shodan_cli_api_key != "":
