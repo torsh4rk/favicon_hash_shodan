@@ -36,16 +36,17 @@ def print_shodan_links(URL, domain, VERBOSE):
         query_1 = f"{requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}"
         query_2 = f"{requests.utils.quote(f'http.favicon.hash:{hash_favicon}')}" + "+" + f"{requests.utils.quote(f'ip:{socket.gethostbyname(domain)}')}"
         print(f"\033[93m[+] View Results for Target {domain} (http.favicon.hash:{hash_favicon}):\n")
-        print(f'\033[92m\t-> Search in Shodan (Link 1) ===> https://www.shodan.io/search?query={query_1} (Dork: http.favicon.hash:{hash_favicon})')
+        print(f'\033[92m-> Search in Shodan (Link 1) => https://www.shodan.io/search?query={query_1} (Dork: http.favicon.hash:{hash_favicon})')
         if VERBOSE == 1:
             os.system(f"shodan search http.favicon.hash:{hash_favicon} " + "--fields ip_str,port --separator \" \" | awk '{print $1\":\"$2}'")
         else:
             pass
-        print(f'\033[92m\t-> Search in Shodan (Link 2) ===> https://www.shodan.io/search?query={query_2} (Dork: http.favicon.hash:{hash_favicon} + ip:{socket.gethostbyname(domain)})')
+        print(f'\033[92m-> Search in Shodan (Link 2) => https://www.shodan.io/search?query={query_2} (Dork: http.favicon.hash:{hash_favicon} + ip:{socket.gethostbyname(domain)})')
         if VERBOSE == 1:
             os.system(f"shodan search http.favicon.hash:{hash_favicon} + ip:{socket.gethostbyname(domain)} " + "--fields ip_str,port --separator \" \" | awk '{print $1\":\"$2}'")
         else:
             pass
+        print("\033[93m\nFinished!\n")
     else:
         sys.exit(1)
 
