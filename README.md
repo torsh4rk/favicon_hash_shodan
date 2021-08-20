@@ -46,7 +46,7 @@ favicon_hash_shodan: python3 favicon_shodan.py --url=https://www.hackerone.com/f
 
 <br>https://isc.sans.edu/forums/diary/Hunting+phishing+websites+with+favicon+hashes/27326/
 <br>https://medium.com/@Asm0d3us/weaponizing-favicon-ico-for-bugbounties-osint-and-what-not-ace3c214e139
-<br>https://infosecwriteups.com/using-shodan-better-way-b40f330e45f6*
+<br>https://infosecwriteups.com/using-shodan-better-way-b40f330e45f6
 
 
 
