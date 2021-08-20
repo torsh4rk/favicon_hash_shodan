@@ -1,4 +1,9 @@
-# Search for a target by favicon
+# Search for target Frameworks on Shodan via favicon hash
+
+```
+Description: Calculate favicon hashes for Shodan from target Frameworks and get other target hosts
+
+```
 
 ## Install
 
@@ -20,9 +25,9 @@ Search for a target by favicon
 
 optional arguments:
   -h, --help            show this help message and exit
-  -u URL, --url URL     For a favicon URL. (Exemple: https://www.hackerone.com/favicon.ico)
+  -u URL, --url URL     For a URL's favicon. (Exemple: https://www.hackerone.com/favicon.ico)
   -i INPUT, --input INPUT
-                        For a favicon URL list.
+                        For a file list of favicons at the URLs.
   -v {0,1}, --verbose {0,1}
                         Set a verbose value to use the shodan_cli (API KEY Required).
 
