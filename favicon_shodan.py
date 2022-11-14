@@ -55,10 +55,13 @@ def print_shodan_links(URL, domain, VERBOSE):
 
 
 def main():
-
+    
+    # Banner
+    print("\nFavicon Shodan Searcher - v1.0")
+    print("Coded by: @torsh4rk\n")
     # Arguments
-
-    parser = argparse.ArgumentParser(description="Calculate favicon hashes for Shodan to search for any target Frameworks")
+    parser = argparse.ArgumentParser(description='Favicon Shodan Searcher - Find favicon hash and search on Shodan')
+    # parser = argparse.ArgumentParser(description="Calculate favicon hashes for Shodan to search for any target Frameworks")
     parser.add_argument("-u","--url", help="For a favicon URL. (Exemple: https://www.hackerone.com/favicon.ico)")
     parser.add_argument("-i","--input", help="For a favicon URL list.")
     parser.add_argument("-v","--verbose", type=int, choices=[0,1], default=0, help="Set a verbose value to use the shodan_cli (API KEY Required).")
