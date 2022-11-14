@@ -19,8 +19,11 @@ def calcule_favicon_hash(URL, domain):
             hash_favicon = str(mmh3.hash(resp_encoded))
             return hash_favicon
         elif req.status_code == 404:
-            print("Favicon not found.")
-            return None
+            req = requests.get(f"https://favicon.splitbee.io/?url={domain}", verify=False)
+            resp = req.content
+            resp_encoded = base64.encodebytes(resp)
+            hash_favicon = str(mmh3.hash(resp_encoded))
+            return hash_favicon
     except (RequestException) as err:
         print("\033[91mConnection Error. \nPlease, verify the target favicon URL or your connection.")
         print(f"\033[91m\t-> More Error details: {err}\n")
