@@ -19,30 +19,39 @@ Description: Calculate favicon hashes for Shodan from target Frameworks and get 
 ```
 favicon_hash_shodan: python3 favicon_shodan.py -h
 
-usage: favicon_shodan.py [-h] [-u URL] [-i INPUT] [-v {0,1}]
+Favicon Shodan Searcher - v1.1
+Coded by: @torsh4rk
 
-Search for a target by favicon
+usage: Example: python favicon_shodan.py -u https://www.hackerone.com -v -ak YOUR_API_KEY
+
+Favicon Shodan Searcher - Search for target frameworks by favicon hash on Shodan.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -u URL, --url URL     For a URL's favicon. (Exemple: https://www.hackerone.com/favicon.ico)
-  -i INPUT, --input INPUT
-                        For a file list of favicons at the URLs.
-  -v {0,1}, --verbose {0,1}
-                        Set a verbose value to use the shodan_cli (API KEY Required).
+  -u URL, --url URL     For a target URL. (Exemple: https://www.hackerone.com)
+  -ul URL_LIST, --url-list URL_LIST
+                        For an URL list file path. (It can not be used with the --url option above)
+  -ak API_KEY, --api-key API_KEY
+                        Set an API_KEY value for Shodan CLI (Optional) with the verbose option (-v).
+  -v, --verbose         Set a verbose value to use the shodan_cli (Option --api-key=API_KEY is required).
 
 ```
 
 ## RUN
 
 ```
-favicon_hash_shodan: python3 favicon_shodan.py --url=https://www.hackerone.com/favicon.ico
+python3 favicon_shodan.py -u https://www.hackerone.com/
 
-[+] Favicon Domain Target ===> www.hackerone.com
-[+] View Results for Target www.hackerone.com (http.favicon.hash:595148549):
+Favicon Shodan Searcher - v1.1
+Coded by: @torsh4rk
+
+
+ [+] Favicon Domain Target ===> www.hackerone.com
+ [+] View Results for Target www.hackerone.com (http.favicon.hash:595148549):
 
 -> Search on Shodan (Link 1) => https://www.shodan.io/search?query=http.favicon.hash%3A595148549 (Dork: http.favicon.hash:595148549)
--> Search on Shodan (Link 2) => https://www.shodan.io/search?query=http.favicon.hash%3A595148549+ip%3A104.16.99.52 (Dork: http.favicon.hash:595148549 + ip:104.16.100.52)
+-> Search on Shodan (Link 2) => https://www.shodan.io/search?query=http.favicon.hash%3A595148549+ip%3A104.16.100.52 (Dork: http.favicon.hash:595148549 + ip:104.16.100.52)
+
 
 Finished!
 ```
