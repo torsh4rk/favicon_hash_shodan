@@ -10,25 +10,29 @@ urllib3.disable_warnings()
 shodan_cli_api_key = ""
 URL_LIST = ""
 
+# results
+http_favicon_hash = ""
+
 # Get the Operating system name to be printed in the banner
 # The shodan commands results is going to filter in according to Operating system name
 system_name = platform.system()
 
 # Calculate and return the http favicon hash value
 def calcule_http_favicon_hash(URL, domain):
-
+    
+    global http_favicon_hash
+    
     try:
         req = requests.get(URL, verify=False)
         resp = req.content
         resp_encoded = base64.encodebytes(resp)
         if req.status_code == 200 or req.status_code == 301 or req.status_code == 302:
             http_favicon_hash = str(mmh3.hash(resp_encoded))
-        elif req.status_code == 404:
+        elif req.status_code == 404 or http_favicon_hash == "":
             req = requests.get(f"https://favicon.splitbee.io/?url={domain}", verify=False)
             resp = req.content
             resp_encoded = base64.encodebytes(resp)
             http_favicon_hash = str(mmh3.hash(resp_encoded))
-
     except (RequestException) as err:
         http_favicon_hash = None
         print(f"\033[91m Connection Error. Please, verify the target favicon URL or your connection. More Error details: {err}\033[97m\n")
@@ -38,13 +42,18 @@ def calcule_http_favicon_hash(URL, domain):
 def print_shodan_links(URL, domain, VERBOSE):
 
     http_favicon_hash = calcule_http_favicon_hash(URL, domain)
+    
     if http_favicon_hash != None:
+        
         query_1 = f"{requests.utils.quote(f'http.favicon.hash:{http_favicon_hash}')}"
         query_2 = f"{requests.utils.quote(f'http.favicon.hash:{http_favicon_hash}')}" + "+" + f"{requests.utils.quote(f'ip:{socket.gethostbyname(domain)}')}"
+        query_3 = f"{requests.utils.quote(f'http.favicon.hash:{http_favicon_hash}')}" + "+" + f"{requests.utils.quote(f'hostname:{domain}')}"
+        
         print(f"\033[93m [+] View Results for Target {domain} (http.favicon.hash:{http_favicon_hash}):\n")
         print(f'\033[92m-> Search on Shodan (Link 1) => https://www.shodan.io/search?query={query_1} (Dork: http.favicon.hash:{http_favicon_hash})')
         print(f'\033[92m-> Search on Shodan (Link 2) => https://www.shodan.io/search?query={query_2} (Dork: http.favicon.hash:{http_favicon_hash} + ip:{socket.gethostbyname(domain)})')
-
+        print(f'\033[92m-> Search on Shodan (Link 3) => https://www.shodan.io/search?query={query_3} (Dork: http.favicon.hash:{http_favicon_hash} + hostname:{domain})')
+        
         if VERBOSE:
             
             print("\n\033[96m Running \"shodan init\" to initialize the Shodan command-line with the provided API_KEY value...  \033[97m\n")
@@ -102,7 +111,7 @@ def main():
     URL = args.url
     URL_LIST = args.url_list
     VERBOSE = args.verbose
-    API_KEY = args.key
+    API_KEY = args.api_key
     
     # Validating the Shodan API KEY at variable "shodan_cli_api_key", the VERBOSE argument (args.verbose)
     if VERBOSE and not API_KEY:
@@ -115,24 +124,27 @@ def main():
     else:
         pass
     
-    
+
     # Validating the URL argument (args.url) and URL_LIST argument (args.url_list)
 
     if args.url == None and args.url_list == None:
         parser.print_help()
         print("\n\033[91m [-] URL and URL_LIST target is missing. \033[97m\n")
         sys.exit()
-
-
     elif args.url != None and args.url_list == None:
         if os.path.basename(urlparse(URL).path) == None or os.path.basename(urlparse(URL).path) != "favicon.ico":
-           URL=URL+"/favicon.ico"
-        elif os.path.basename(urlparse(URL).path) == '/':
-            URL=URL+"favicon.ico"
+            if URL.endswith("/"):
+                URL=URL.rstrip("/")
+            URL=URL+"/favicon.ico"
         else:
             pass
-
+        
         domain = urlparse(URL).netloc
+        if domain.startswith("www."):
+            domain = domain[4:]
+        else:
+            pass
+        
         print(f'\n\033[93m [+] Favicon Domain Target ===> {domain}\033[97m')
         print_shodan_links(URL, domain, VERBOSE)
 
@@ -144,9 +156,9 @@ def main():
             for line in file:
                 URL = line.strip()
                 if os.path.basename(urlparse(URL).path) == None or os.path.basename(urlparse(URL).path) != "favicon.ico":
+                    if URL.endswith("/"):
+                        URL=URL.rstrip("/")
                     URL=URL+"/favicon.ico"
-                elif os.path.basename(urlparse(URL).path) == '/':
-                    URL=URL+"favicon.ico"
                 else:
                     pass
                 domain = urlparse(URL).netloc
@@ -158,7 +170,6 @@ def main():
         print(f'\033[91m [-] URL and URL_LIST values can not be used together.\033[97m\n')
         sys.exit(1)
 
-   
 if __name__ == "__main__":
     try:
         main()
