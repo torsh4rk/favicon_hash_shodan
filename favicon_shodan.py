@@ -132,7 +132,7 @@ def main():
     
     regex = re.compile(
         r"^https?://"  # Check if it begins with http:// or https://
-        r"([a-zA-Z0-9-]+\.)+([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,})+(.*)$"  # Check if it begins with www.
+        r"([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,6}$)+(.*)"  # Check the domain
     )
 
     if args.url == None and args.url_list == None:
