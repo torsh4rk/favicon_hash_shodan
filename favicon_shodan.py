@@ -39,9 +39,11 @@ def calcule_http_favicon_hash(URL):
 
 def print_shodan_links(URL, VERBOSE):
     
+    regex = re.compile(r"([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,}$)")
     # Get the DNS from the URL
     DNS = urlparse(URL).netloc; domain = DNS[4:] if DNS.startswith("www.") else DNS
-    print(f'\n\033[93m [+] Domain (target): {domain}\033[97m')
+    
+    print(f'\n\033[93m [+] Domain (target): {domain}\033[97m') if regex.match(domain) else (print(f"\n\033[91m [-] The domain {do} is not valid. \033[97m\n"), sys.exit(1))
     
     http_favicon_hash = calcule_http_favicon_hash(URL)
     
@@ -132,7 +134,7 @@ def main():
     
     regex = re.compile(
         r"^https?://"  # Check if it begins with http:// or https://
-        r"([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,6}$)+(.*)"  # Check the domain
+        r"([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,6})+(.*)"  # Check the domain
     )
 
     if args.url == None and args.url_list == None:
