@@ -43,7 +43,7 @@ def print_shodan_links(URL, VERBOSE):
     # Get the DNS from the URL
     DNS = urlparse(URL).netloc; domain = DNS[4:] if DNS.startswith("www.") else DNS
     
-    print(f'\n\033[93m [+] Domain (target): {domain}\033[97m') if regex.match(domain) else (print(f"\n\033[91m [-] The domain {do} is not valid. \033[97m\n"), sys.exit(1))
+    print(f'\n\033[93m [+] Domain (target): {domain}\033[97m') if regex.match(domain) else (print(f"\n\033[91m [-] The domain {domain} is not valid. \033[97m\n"), sys.exit(1))
     
     http_favicon_hash = calcule_http_favicon_hash(URL)
     
